@@ -55,3 +55,30 @@ export const apiRequest = async (endpoint, options = {}, role = 'buyer') => {
     throw error;
   }
 };
+
+// Buyer API functions
+export const buyerAPI = {
+  getProfile: () => apiRequest('/api/profile', {}, 'buyer'),
+  getOrders: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return apiRequest(`/api/orders/my-orders?${query}`, {}, 'buyer');
+  },
+  getCart: () => apiRequest('/api/cart', {}, 'buyer'),
+  addToCart: (data) => apiRequest('/api/cart/add', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  }, 'buyer'),
+  getProducts: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return apiRequest(`/api/products/search?${query}`, {}, 'buyer');
+  },
+  createOrderFromCart: (data) => apiRequest('/api/buyer/orders/create-from-cart', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  }, 'buyer'),
+  getQuotations: (orderId) => apiRequest(`/api/orders/${orderId}/quotations`, {}, 'buyer'),
+  acceptQuotation: (orderId, quotationId) => apiRequest(`/api/orders/${orderId}/accept-quotation`, {
+    method: 'POST',
+    body: JSON.stringify({ quotation_id: quotationId })
+  }, 'buyer')
+};
