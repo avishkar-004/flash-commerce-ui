@@ -104,3 +104,57 @@ export const sellerAPI = {
   },
   getAnalytics: (period = 30) => apiRequest(`/api/seller/analytics/overview?period=${period}`, {}, 'seller')
 };
+
+// Admin API functions
+export const adminAPI = {
+  getProfile: () => apiRequest('/api/profile', {}, 'admin'),
+  getBuyers: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return apiRequest(`/api/admin/users/buyers?${query}`, {}, 'admin');
+  },
+  getSellers: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return apiRequest(`/api/admin/users/sellers?${query}`, {}, 'admin');
+  },
+  getAdmins: () => apiRequest('/api/admin/users/admins', {}, 'admin'),
+  createAdmin: (data) => apiRequest('/api/admin/create-admin', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  }, 'admin'),
+  suspendUser: (userId) => apiRequest(`/api/admin/users/${userId}/suspend`, {
+    method: 'PUT'
+  }, 'admin'),
+  activateUser: (userId) => apiRequest(`/api/admin/users/${userId}/activate`, {
+    method: 'PUT'
+  }, 'admin'),
+  removeUser: (userId) => apiRequest(`/api/admin/users/${userId}/remove`, {
+    method: 'DELETE'
+  }, 'admin')
+};
+
+// Utility functions
+export const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(amount);
+};
+
+export const formatDate = (dateString) => {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+};
+
+export const getStatusColor = (status) => {
+  const colors = {
+    pending: 'bg-yellow-100 text-yellow-800',
+    accepted: 'bg-green-100 text-green-800',
+    completed: 'bg-blue-100 text-blue-800',
+    cancelled: 'bg-red-100 text-red-800',
+    rejected: 'bg-gray-100 text-gray-800'
+  };
+  return colors[status] || 'bg-gray-100 text-gray-800';
+};
