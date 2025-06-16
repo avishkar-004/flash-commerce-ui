@@ -82,3 +82,25 @@ export const buyerAPI = {
     body: JSON.stringify({ quotation_id: quotationId })
   }, 'buyer')
 };
+
+// Seller API functions
+export const sellerAPI = {
+  getProfile: () => apiRequest('/api/profile', {}, 'seller'),
+  getAvailableOrders: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return apiRequest(`/api/seller/orders/available?${query}`, {}, 'seller');
+  },
+  getMyQuotations: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return apiRequest(`/api/seller/quotations/my-quotations?${query}`, {}, 'seller');
+  },
+  createQuotation: (data) => apiRequest('/api/seller/quotations/create', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  }, 'seller'),
+  getAcceptedOrders: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return apiRequest(`/api/seller/orders/accepted?${query}`, {}, 'seller');
+  },
+  getAnalytics: (period = 30) => apiRequest(`/api/seller/analytics/overview?period=${period}`, {}, 'seller')
+};
