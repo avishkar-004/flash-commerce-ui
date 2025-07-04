@@ -81,7 +81,7 @@ const AdminDashboard = () => {
   };
 
   const StatCard = ({ icon: Icon, title, value, subtitle, gradient, change, trend = "up" }) => (
-    <div className={`relative overflow-hidden rounded-2xl p-6 text-white transform hover:scale-105 transition-all duration-300 hover:shadow-2xl ${gradient}`}>
+    <div className={`relative overflow-hidden rounded-2xl p-6 text-white transform hover:scale-[1.03] transition-all duration-300 hover:shadow-2xl ${gradient}`}>
       <div className="absolute top-0 right-0 w-20 h-20 rounded-full bg-white bg-opacity-10 -mr-10 -mt-10"></div>
       <div className="absolute bottom-0 left-0 w-16 h-16 rounded-full bg-white bg-opacity-5 -ml-8 -mb-8"></div>
       
@@ -134,7 +134,7 @@ const AdminDashboard = () => {
   const QuickActionButton = ({ icon: Icon, title, onClick, color = "from-blue-500 to-blue-700" }) => (
     <button
       onClick={onClick}
-      className={`w-full bg-gradient-to-r ${color} text-white rounded-xl p-4 flex items-center justify-center space-x-3 hover:shadow-lg transform hover:scale-105 transition-all duration-300 group`}
+      className={`w-full bg-gradient-to-r ${color} text-white rounded-xl p-4 flex items-center justify-center space-x-3 hover:shadow-lg transform hover:scale-[1.03] transition-all duration-300 group`}
     >
       <Icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
       <span className="font-semibold">{title}</span>
@@ -311,7 +311,7 @@ const AdminDashboard = () => {
                   <span className="text-gray-600">Last Backup</span>
                   <span className="font-semibold text-purple-600">{formatDate(dashboardData.systemHealth.lastBackup)}</span>
                 </div>
-                <button className="w-full bg-gradient-to-r from-red-500 to-red-700 text-white rounded-lg p-3 font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                <button className="w-full bg-gradient-to-r from-red-500 to-red-700 text-white rounded-lg p-3 font-semibold hover:shadow-lg transform hover:scale-[1.03] transition-all duration-300">
                   Run System Cleanup
                 </button>
               </div>
