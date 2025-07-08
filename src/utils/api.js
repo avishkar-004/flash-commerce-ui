@@ -51,7 +51,7 @@ export const apiRequest = async (endpoint, options = {}, role = 'buyer') => {
     
     return await response.json();
   } catch (error) {
-    console.error('API Request Error:', error);
+    console.error('[API Error]', endpoint, error);
     throw error;
   }
 };
